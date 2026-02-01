@@ -1,0 +1,50 @@
+1. Distributed Web Infrastructure
+User Flow
+
+User accesses www.foobar.com
+
+DNS resolves the domain to the load balancer IP
+
+Request goes to HAProxy
+
+HAProxy forwards the request to one of two backend servers
+
+Nginx passes the request to the application server
+
+The application reads/writes data from the database
+
+Response is returned to the user
+
+Why Each Component Is Added
+
+Load Balancer (HAProxy): distributes traffic and improves availability
+
+Second Server: reduces load and avoids a single backend failure
+
+Database Replication: improves read performance and data availability
+
+Load Balancer Details
+
+Algorithm: Round Robin
+Requests are sent sequentially to each server.
+
+Setup: Active-Active
+Both servers handle traffic simultaneously.
+
+Active-Passive difference: only one server is active; the other waits for failure.
+
+Database Primary-Replica
+
+Primary (Master): handles write operations
+
+Replica (Slave): read-only copy of data
+
+Application writes to Primary and may read from Replica
+
+Issues With This Infrastructure
+
+SPOF: load balancer and primary database
+
+Security: no firewall, no HTTPS
+
+Monitoring: none implemented
