@@ -1,0 +1,38 @@
+Simple web stack
+
+-User Access Flow (Start Here)
+-A user opens a browser and types www.foobar.com
+-The browser asks DNS to resolve the domain name
+-DNS returns the IP address 8.8.8.8
+-The browser sends an HTTP/HTTPS request to 8.8.8.8
+-The web server (Nginx) receives the request
+-Nginx forwards the request to the application server
+-The application server executes the codebase
+-If needed, it queries the MySQL database
+-The response travels back to the user’s browser
+
+-What is a Server?
+A server is a physical or virtual machine that stores data, runs software, and responds to requests from users over a network.
+What is the Role of the Domain Name?
+The domain name (foobar.com) is a human-readable address that maps to an IP address, so users don’t need to remember numbers.
+-What Type of DNS Record is www?
+www.foobar.com uses an A record
+It points directly to the IP address 8.8.8.8
+-What is the Role of the Web Server (Nginx)?
+Accepts HTTP/HTTPS requests
+Handles static content (HTML, CSS, images)
+Acts as a reverse proxy to the application server
+Manages SSL/TLS
+-What is the Role of the Application Server?
+Runs the application logic (business rules)
+Processes requests passed from Nginx
+Communicates with the database
+Generates dynamic responses
+-What is the Role of the Database (MySQL)?
+Stores persistent data
+Handles CRUD operations
+Ensures data consistency and integrity
+-How Does the Server Communicate with the User’s Computer?
+Uses HTTP or HTTPS
+Runs over TCP/IP
+HTTPS adds encryption using SSL/TLS
