@@ -1,0 +1,41 @@
+3. Scale Up Infrastructure
+Overview
+
+This infrastructure scales the previous design by adding redundancy and separating responsibilities across dedicated servers.
+The goal is to improve availability, scalability, and maintainability.
+
+Added Elements and Reasons
+1. Additional Server
+
+-Increases system capacity
+-Allows traffic and workloads to be distributed
+-Reduces the impact of a single server failure
+
+2. Load Balancer Cluster (HAProxy)
+
+-A second load balancer is added and configured as a cluster with the first one
+-Removes the load balancer as a single point of failure
+-Ensures continuous traffic handling if one load balancer goes down
+
+3. Component Separation
+
+Each major component runs on its own dedicated server:
+
+--Web Server
+*Handles HTTP/HTTPS requests
+*Serves static content
+*Forwards dynamic requests
+
+--Application Server
+*Executes business logic
+*Processes dynamic content
+*Communicates with the database
+
+--Database Server
+*Stores and manages persistent data
+*Handles read and write operations
+
+--Why this separation is added:
+*Each layer can scale independently
+*Better performance and resource isolation
+*Easier maintenance and troubleshooting
