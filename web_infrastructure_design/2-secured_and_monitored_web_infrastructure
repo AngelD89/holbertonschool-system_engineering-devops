@@ -1,0 +1,74 @@
+2. Secured and Monitored Web Infrastructure
+
+User Request Flow:
+1.User accesses www.foobar.com
+2.DNS resolves the domain to the load balancer IP
+3.HTTPS request reaches the load balancer
+4.SSL is terminated at the load balancer
+5.Traffic is forwarded to one of the backend servers
+6.Nginx → application server → MySQL
+7.Response is returned to the user
+
+Added Components & Why
+--Firewalls (3)
+*One in front of each server
+*Restrict incoming and outgoing traffic
+*Allow only required ports (e.g. 80, 443, 3306)
+*Reduce attack surface
+
+--SSL Certificate
+*Enables HTTPS
+*Encrypts data in transit
+*Prevents data interception and tampering
+*Verifies server identity
+
+--Monitoring Clients (3)
+*Installed on each server
+*Collect logs and metrics
+*Send data to a monitoring service (e.g. Sumologic)
+*Allow visibility into system health
+
+Explanation of Key Concepts
+
+--What Are Firewalls For?
+*Control network traffic
+*Block unauthorized access
+*Protect internal services
+
+--Why Serve Traffic Over HTTPS?
+*Encrypts communication
+*Protects user data
+*Prevents man-in-the-middle attacks
+*Required for modern web security standards
+
+-What Is Monitoring Used For?
+*Detect failures
+*Track performance
+*Analyze logs
+*Trigger alerts
+
+--How Monitoring Collects Data
+*Monitoring agents run on servers
+*Collect metrics (CPU, memory, requests)
+*Send data periodically to a monitoring service
+
+--How to Monitor Web Server QPS
+*Track number of HTTP requests per second
+*Use Nginx access logs or metrics
+*Send request counts to the monitoring system
+*Set alerts for abnormal traffic spikes
+
+Issues With This Infrastructure
+--SSL Termination at Load Balancer
+*Traffic between load balancer and servers is unencrypted
+*Internal traffic can be intercepted if network is compromised
+
+--Single MySQL Write Server
+*Primary database is a SPOF
+*If it fails, no writes are possible
+*Limits scalability
+
+--Servers With All Components
+*Harder to scale specific layers
+*Resource contention (DB + app + web)
+*More complex maintenance and troubleshooting
